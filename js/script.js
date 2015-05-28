@@ -22,60 +22,58 @@ var convertToNumerals = function (number) {
   var numbers = number.split("").reverse();
   for (var i = 0; i < numbers.length; i++) {
     var currentNumber = parseInt(numbers[i]);
-    switch(i) {
-      case 0: //one place
-        if (currentNumber === 4) {
-          results = results + 'IV';
-        } else if (currentNumber >= 5 && currentNumber < 9) {
-          results = results + 'V';
-          if (currentNumber < 9) {
-            results = results + digitPlace(currentNumber - 5, "I");
-          }
-        } else if (currentNumber === 9) {
-          results = results + 'IX';
-        } else {
-          results = results + digitPlace(currentNumber, "I");
-        }
-        break;
-      case 1: //tens place
-        if (currentNumber < 5 && currentNumber >= 4) {
-          results = 'XL' + results;
-        } else if (currentNumber > 5 && currentNumber < 9) {
-          if (currentNumber < 9) {
-            results = digitPlace(currentNumber - 5, "X") + results
-          }
-          results = 'L' + results;
-        } else if (currentNumber === 9) {
-          results = 'XC' + results;
-        } else {
-          results = digitPlace(currentNumber, "X") + results;
-        }
-        break;
-      case 2:
-
-        if (currentNumber < 5 && currentNumber >= 4) {
-          results = 'CD' + results;
-        } else if (currentNumber > 5 && currentNumber < 9) {
-          if (currentNumber < 9) {
-            results = digitPlace(currentNumber - 5, "C") + results
-          }
-          results = 'D' + results;
-        } else if (currentNumber === 9) {
-          results = 'CM' + results;
-        } else {
-          results = digitPlace(currentNumber, "C") + results;
-        }
-        break;
-      case 3:
-        results = digitPlace(currentNumber, "M") + results;
-        break;
-    };
+    results = digitPlace(currentNumber, i) + results;
   };
 
   return results;
 };
 
-var digitPlace = function (number, numeral) {
+var digitPlace = function (number, index) {
+  var ones;
+  var fives;
+  var tens;
+
+  switch (index) {
+    case 0:
+      ones = 'I'
+      fives = 'V'
+      tens = 'X'
+      break;
+    case 1:
+      ones = 'X'
+      fives = 'L'
+      tens = 'C'
+      break;
+    case 2:
+      ones = 'C'
+      fives = 'D'
+      tens = 'M'
+      break;
+    case 3:
+      ones = 'M'
+      break;
+  }
+
+  var results = '';
+  if (number < 5 && number >= 4) {
+    results = ones + fives + results;
+  } else if (number === 5) {
+    results = fives + results;
+  } else if (number > 5 && number < 9) {
+    if (number < 9) {
+      results = addsOnes(number - 5, ones) + results
+    }
+    results = fives + results;
+  } else if (number === 9) {
+    results = ones + tens + results;
+  } else {
+    results = addsOnes(number, ones) + results;
+  }
+
+  return results;
+}
+
+var addsOnes = function (number, numeral) {
   var result = '';
   for (var i = 1; i <= number; i++) {
     result += numeral;
