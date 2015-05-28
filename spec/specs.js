@@ -18,4 +18,12 @@ describe('convertToNumerals', function() {
   it("converts 4 via subtraction", function() {
     expect(convertToNumerals(4)).to.equal('IV');
   });
+
+  it("accounts for 5", function() {
+    expect(convertToNumerals(5)).to.equal('V');
+  });
+
+  it("accounts for greater than 5, up to 8", function() {
+    expect(convertToNumerals(8)).to.equal('VIII');
+  });
 });

@@ -18,12 +18,17 @@ var convertToNumerals = function (number) {
   var results = '';
   var numbers = number.split("");
   for (var i = 0; i < numbers.length; i++) {
+    var currentNumber = parseInt(numbers[i]);
     switch(i) {
       case 0: //one place
-        if (parseInt(numbers[i]) === 4) {
+        if (currentNumber === 4) {
           results = results + 'IV';
+        } else if (currentNumber === 5) {
+          results = results + 'V';
+        } else if (currentNumber > 5) {
+          results = results + 'V' + digitPlace(currentNumber - 5, "I");
         } else {
-          results = results + digitPlace(numbers[i], "I");
+          results = results + digitPlace(currentNumber, "I");
         }
         break;
       case 1: //tens place
@@ -42,7 +47,6 @@ var convertToNumerals = function (number) {
 };
 
 var digitPlace = function (number, numeral) {
-  number = parseInt(number);
   var result = '';
   for (var i = 1; i <= number; i++) {
     result += numeral;
