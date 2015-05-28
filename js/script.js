@@ -9,9 +9,6 @@ $( document ).ready(function() {
 });
 
 //raw js
-var foo = function(bar) {
-  return false;
-};
 
 var convertToNumerals = function (number) {
   if (number > 3999) {
@@ -29,28 +26,16 @@ var convertToNumerals = function (number) {
 };
 
 var digitPlace = function (number, index) {
-  var ones;
-  var fives;
-  var tens;
+  var ones, fives, tens;
 
   switch (index) {
-    case 0:
-      ones = 'I'
-      fives = 'V'
-      tens = 'X'
+    case 0: ones = 'I'; fives = 'V'; tens = 'X'
       break;
-    case 1:
-      ones = 'X'
-      fives = 'L'
-      tens = 'C'
+    case 1: ones = 'X'; fives = 'L'; tens = 'C'
       break;
-    case 2:
-      ones = 'C'
-      fives = 'D'
-      tens = 'M'
+    case 2: ones = 'C'; fives = 'D'; tens = 'M'
       break;
-    case 3:
-      ones = 'M'
+    case 3: ones = 'M'
       break;
   }
 
