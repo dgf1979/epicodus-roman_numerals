@@ -26,4 +26,12 @@ describe('convertToNumerals', function() {
   it("accounts for greater than 5, up to 8", function() {
     expect(convertToNumerals(8)).to.equal('VIII');
   });
+
+  it("accounts for 9", function() {
+    expect(convertToNumerals(9)).to.equal('IX');
+  });
+
+  it("accounts for numbers less than 50", function() {
+    expect(convertToNumerals(49)).to.equal('XLIX');
+  });
 });

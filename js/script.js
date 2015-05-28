@@ -16,7 +16,7 @@ var foo = function(bar) {
 var convertToNumerals = function (number) {
   number = number.toString();
   var results = '';
-  var numbers = number.split("");
+  var numbers = number.split("").reverse();
   for (var i = 0; i < numbers.length; i++) {
     var currentNumber = parseInt(numbers[i]);
     switch(i) {
@@ -25,14 +25,20 @@ var convertToNumerals = function (number) {
           results = results + 'IV';
         } else if (currentNumber === 5) {
           results = results + 'V';
-        } else if (currentNumber > 5) {
+        } else if (currentNumber > 5 && currentNumber < 9) {
           results = results + 'V' + digitPlace(currentNumber - 5, "I");
+        } else if (currentNumber === 9) {
+          results = results + 'IX';
         } else {
           results = results + digitPlace(currentNumber, "I");
         }
         break;
       case 1: //tens place
-        results = digitPlace(numbers[i], "X") + results;
+        if (currentNumber < 5 && currentNumber >= 4) {
+          results = 'XL' + results;
+        } else {
+          results = digitPlace(numbers[i], "X") + results;
+        }
         break;
       case 2:
         results = digitPlace(numbers[i], "C") + results;
