@@ -34,4 +34,32 @@ describe('convertToNumerals', function() {
   it("accounts for numbers less than 50", function() {
     expect(convertToNumerals(49)).to.equal('XLIX');
   });
+
+  it("accounts for numbers from 50 to 89", function() {
+    expect(convertToNumerals(89)).to.equal('LXXXIX');
+  });
+
+  it("accounts for numbers from 90 to 99", function() {
+    expect(convertToNumerals(99)).to.equal('XCIX');
+  });
+
+  it("accounts for numbers less than 500", function() {
+    expect(convertToNumerals(499)).to.equal('CDXCIX');
+  });
+
+  it("accounts for numbers from 500 to 899", function() {
+    expect(convertToNumerals(899)).to.equal('DCCCXCIX');
+  });
+
+  it("accounts for numbers from 900 to 999", function() {
+    expect(convertToNumerals(999)).to.equal('CMXCIX');
+  });
+
+  it("accounts for numbers up to 3999", function() {
+    expect(convertToNumerals(3999)).to.equal('MMMCMXCIX');
+  });
+
+  it("alerts the user if the number is too high", function() {
+    expect(convertToNumerals(4000)).to.equal('Your number is too large');
+  });
 });
