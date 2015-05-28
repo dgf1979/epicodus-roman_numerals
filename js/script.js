@@ -20,31 +20,32 @@ var convertToNumerals = function (number) {
   for (var i = 0; i < numbers.length; i++) {
     switch(i) {
       case 0: //one place
-        results = results + onesPlace(numbers[i]);
+        if (parseInt(numbers[i]) === 4) {
+          results = results + 'IV';
+        } else {
+          results = results + digitPlace(numbers[i], "I");
+        }
         break;
       case 1: //tens place
-        results = tensPlace(numbers[i]) + results;
+        results = digitPlace(numbers[i], "X") + results;
         break;
-    }
+      case 2:
+        results = digitPlace(numbers[i], "C") + results;
+        break;
+      case 3:
+        results = digitPlace(numbers[i], "M") + results;
+        break;
+    };
   };
 
   return results;
 };
 
-var onesPlace = function (number) {
+var digitPlace = function (number, numeral) {
   number = parseInt(number);
-  var result = ''
+  var result = '';
   for (var i = 1; i <= number; i++) {
-    result += 'I'
-  }
-  return result;
-}
-
-var tensPlace = function (number) {
-  number = parseInt(number);
-  var result = ''
-  for (var i = 1; i <= number; i++) {
-    result += 'X'
+    result += numeral;
   }
   return result;
 }
